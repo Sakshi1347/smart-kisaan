@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Sovereign Intelligence Dark Navy Palette */
+    --background: 218 78% 7%;          /* #060e20 */
+    --foreground: 226 100% 93%;        /* #dee5ff */
+
+    --card: 220 60% 9%;               /* #091328 */
+    --card-foreground: 226 100% 93%;
+
+    --popover: 222 50% 12%;            /* #0f1930 */
+    --popover-foreground: 226 100% 93%;
+
+    --primary: 222 100% 76%;           /* #85adff */
+    --primary-foreground: 218 100% 20%; /* #002c66 */
+
+    --secondary: 222 62% 90%;          /* #d8e3fb */
+    --secondary-foreground: 222 23% 30%; /* #3c475a */
+
+    --muted: 222 30% 15%;              /* #141f38 */
+    --muted-foreground: 226 19% 71%;   /* #a3aac4 */
+
+    --accent: 155 100% 81%;            /* #9bffce - Emerald */
+    --accent-foreground: 160 100% 20%; /* #006443 */
+
+    --destructive: 3 100% 72%;         /* #ff716c */
+    --destructive-foreground: 0 100% 14%; /* #490006 */
+
+    --border: 222 16% 30%;             /* #40485d at 15% effective */
+    --input: 222 40% 17%;              /* #192540 */
+    --ring: 222 100% 76%;
+
+    --radius: 0.75rem;
+
+    /* Extended sovereign tokens */
+    --surface: 218 78% 7%;
+    --surface-container-low: 220 60% 9%;
+    --surface-container: 222 50% 12%;
+    --surface-container-high: 222 40% 15%;
+    --surface-container-highest: 222 40% 17%;
+    --surface-bright: 222 38% 20%;
+    --surface-variant: 222 40% 17%;
+    --surface-tint: 222 100% 76%;
+
+    --primary-dim: 222 100% 70%;
+    --primary-container: 222 100% 72%;
+    --tertiary: 155 100% 81%;
+    --tertiary-dim: 155 80% 63%;
+    --outline: 226 14% 49%;
+    --outline-variant: 222 16% 30%;
+    --on-surface: 226 100% 93%;
+    --on-surface-variant: 226 19% 71%;
+
+    --sidebar-background: 220 60% 9%;
+    --sidebar-foreground: 226 100% 93%;
+    --sidebar-primary: 222 100% 76%;
+    --sidebar-primary-foreground: 218 100% 20%;
+    --sidebar-accent: 222 40% 17%;
+    --sidebar-accent-foreground: 226 100% 93%;
+    --sidebar-border: 222 16% 30%;
+    --sidebar-ring: 222 100% 76%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(222 100% 76%), hsl(222 100% 72%));
+    --gradient-glow: 0 0 20px rgba(133, 173, 255, 0.3);
+    --shadow-ambient: 0px 20px 40px rgba(133, 173, 255, 0.05);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--outline-variant));
+    border-radius: 10px;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    backdrop-filter: blur(24px);
+    background: hsl(var(--surface-variant) / 0.6);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(133, 173, 255, 0.3);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-container)));
+  }
+
+  .gradient-primary-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-container)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .surface-glow {
+    box-shadow: 0px 20px 40px rgba(133, 173, 255, 0.05);
+  }
+
+  .ghost-border {
+    border: 1px solid hsl(var(--outline-variant) / 0.15);
+  }
+}
+
+/* ==========================================================================
+   Phase 1 — Feature 6: Basic Accessibility Controls
+   ========================================================================== */
+
+/* 1. Text Sizing Modes (Scales all rem units proportionally) */
+html.text-size-normal {
+  font-size: 100%; /* Default 16px */
+}
+
+html.text-size-large {
+  font-size: 112.5%; /* 18px (+12.5% increase) */
+}
+
+html.text-size-xl {
+  font-size: 125%; /* 20px (+25% increase) */
+}
+
+/* 2. High Contrast Theme (WCAG 2.2 AAA Contrast > 12:1) */
+html.high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+
+  --card: 0 0% 4%;
+  --card-foreground: 0 0% 100%;
+
+  --popover: 0 0% 6%;
+  --popover-foreground: 0 0% 100%;
+
+  --surface: 0 0% 0%;
+  --surface-container-low: 0 0% 4%;
+  --surface-container: 0 0% 8%;
+  --surface-container-high: 0 0% 12%;
+  --surface-container-highest: 0 0% 16%;
+  --surface-high: 0 0% 12%;
+  --surface-highest: 0 0% 16%;
+
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 0% 92%;
+  --on-surface: 0 0% 100%;
+  --on-surface-variant: 0 0% 90%;
+
+  --primary: 48 100% 50%; /* Vibrant Gold #ffcc00 */
+  --primary-foreground: 0 0% 0%; /* Pure Black */
+
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 155 100% 70%;
+  --accent-foreground: 0 0% 0%;
+
+  --destructive: 0 100% 65%;
+  --destructive-foreground: 0 0% 0%;
+
+  --border: 0 0% 100%;
+  --outline: 0 0% 100%;
+  --outline-variant: 0 0% 85%;
+  --ring: 48 100% 50%;
+}
+
+html.high-contrast .ghost-border {
+  border: 2px solid #ffffff !important;
+}
+
+html.high-contrast .glass-panel {
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border-bottom: 2px solid #ffffff !important;
+}
+
+/* 3. Universal Focus Indicators (WCAG 2.4.11 / 2.4.13 Focus Appearance) */
+:focus-visible {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+html.high-contrast :focus-visible {
+  outline: 3px solid #ffea00 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 5px #000000 !important;
+}
+
+/* 4. Reduced Motion (WCAG 2.3.3) */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
